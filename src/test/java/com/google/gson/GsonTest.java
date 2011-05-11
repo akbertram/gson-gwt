@@ -29,13 +29,9 @@ public class GsonTest {
   @Test
   public void testDoubleConversion() {
 
-    assertThat(new JsonPrimitive(13).getAsString(), equalTo("13.0"));
+    assertThat(new JsonPrimitive(13).getAsString(), equalTo("13"));
     assertThat(new JsonPrimitive(1.2).getAsString(), equalTo("1.2"));
     assertThat(new JsonPrimitive(1d/3d).getAsString(), equalTo("0.3333333333333333"));
-
-
-    Number d = 42d;
-    assertThat(d.toString(), equalTo("42.0"));
 
   }
 

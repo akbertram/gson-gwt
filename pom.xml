@@ -46,6 +46,19 @@
         </dependency>
     </dependencies>
 
+    <distributionManagement>
+        <repository>
+            <id>bedatadriven-oss</id>
+            <name>Bedatadriven Open Source Releases</name>
+            <url>http://nexus.bedatadriven.com/content/repositories/oss-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>bedatadriven-oss-snapshots</id>
+            <name>Bedatadriven Open Source Snapshots</name>
+            <url>http://nexus.bedatadriven.com/content/repositories/oss-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
@@ -56,7 +69,8 @@
                     <source>1.6</source>
                     <target>1.6</target>
                     <excludes>
-                        <exclude>**/emul/*.java</exclude>
+                        <!-- Only sources ! -->
+                        <exclude>com/google/gson/emul/**/*.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>

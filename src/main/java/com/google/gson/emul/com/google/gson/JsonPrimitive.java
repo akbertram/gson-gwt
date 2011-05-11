@@ -16,10 +16,7 @@
 
 package com.google.gson;
 
-import com.google.gwt.json.client.JSONBoolean;
-import com.google.gwt.json.client.JSONNumber;
-import com.google.gwt.json.client.JSONString;
-import com.google.gwt.json.client.JSONValue;
+import com.google.gwt.json.client.*;
 
 
 /**
@@ -62,7 +59,11 @@ public final class JsonPrimitive extends JsonElement {
    * @param string the value to create the primitive with.
    */
   public JsonPrimitive(String string) {
-    this.value = new JSONString(string);
+    if(string == null) {
+      this.value = JSONNull.getInstance();
+    } else {
+      this.value = new JSONString(string);
+    }
   }
 
   /**
@@ -86,7 +87,9 @@ public final class JsonPrimitive extends JsonElement {
   }
 
   void setValue(Object primitive) {
-    if(primitive instanceof Character) {
+    if(primitive instanceof String) {
+      this.value = new JSONString((String) primitive);
+    } else if(primitive instanceof Character) {
       // convert characters to strings since in JSON, characters are represented as a single
       // character string
       char c = ((Character) primitive).charValue();
@@ -96,7 +99,7 @@ public final class JsonPrimitive extends JsonElement {
     } else if(primitive instanceof Boolean) {
       this.value = JSONBoolean.getInstance((Boolean) primitive);
     } else {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException(primitive.getClass().getName());
     }
   }
 

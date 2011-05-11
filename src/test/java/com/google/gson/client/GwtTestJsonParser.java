@@ -79,9 +79,46 @@ public class GwtTestJsonParser extends GWTTestCase {
     obj.add("foo", new JsonPrimitive("bar"));
     obj.add("size", new JsonPrimitive(13));
     obj.add("list", arr);
+    obj.addProperty("s", "hello world");
+    obj.addProperty("n", 41);
+    obj.addProperty("b", true);
+    obj.addProperty("c", 'a');
+    obj.addProperty("nzs", (String)null);
+    obj.addProperty("nzb", (Boolean)null);
+    obj.addProperty("nzn", (Number)null);
+    obj.addProperty("nzc", (Character)null);
 
 
-    assertEquals("{'foo':'bar', 'size':13, 'list':[21,44,'zap']}".replace('\'', '\"'), obj.toString());
+    assertEquals(("{'foo':'bar', 'size':13, 'list':[21,44,'zap'], 's':'hello world', " +
+        "'n':41, 'b':true, 'c':'a', 'nzs':null, 'nzb':null, 'nzn':null, 'nzc':null}")
+            .replace('\'', '\"'), obj.toString());
+
+  }
+
+  public void testArrayIterator() {
+
+    JsonParser parser = new JsonParser();
+    JsonArray array = parser.parse("[1,2,'foo',null,true,42.5]").getAsJsonArray();
+
+    int i=0;
+    for(JsonElement element : array) {
+      if(i==0) {
+        assertEquals(1, element.getAsInt());
+      } else if(i==1) {
+        assertEquals(2, element.getAsInt());
+      } else if(i==2) {
+        assertEquals("foo", element.getAsString());
+      } else if(i==3) {
+        assertTrue(element.isJsonNull());
+      } else if(i==4) {
+        assertTrue(element.getAsBoolean());
+      } else if(i==5) {
+        assertEquals(42.5, element.getAsDouble());
+      }
+      i++;
+    }
+
+    assertEquals(6, i);
 
   }
 }

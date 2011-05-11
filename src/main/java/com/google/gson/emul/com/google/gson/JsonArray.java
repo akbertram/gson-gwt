@@ -93,7 +93,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
       private int i=0;
 
       public boolean hasNext() {
-        return i<=elements.size();
+        return i<elements.size();
       }
 
       public JsonElement next() {

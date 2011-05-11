@@ -87,7 +87,11 @@ public final class JsonObject extends JsonElement {
    * @param value the string value associated with the member.
    */
   public void addProperty(String property, String value) {
-    add(property, createJsonElement(value));
+    if(value == null) {
+      add(property, JsonNull.createJsonNull());
+    } else {
+      add(property, new JsonPrimitive(value));
+    }
   }
 
   /**
@@ -98,7 +102,11 @@ public final class JsonObject extends JsonElement {
    * @param value the number value associated with the member.
    */
   public void addProperty(String property, Number value) {
-    add(property, createJsonElement(value));
+    if(value == null) {
+      add(property, JsonNull.createJsonNull());
+    } else {
+      add(property, createJsonElement(value));
+    }
   }
 
   /**
@@ -109,7 +117,11 @@ public final class JsonObject extends JsonElement {
    * @param value the number value associated with the member.
    */
   public void addProperty(String property, Boolean value) {
-    add(property, createJsonElement(value));
+    if(value == null) {
+      add(property, JsonNull.createJsonNull());
+    } else {
+      add(property, createJsonElement(value));
+    }
   }
 
   /**
@@ -120,7 +132,11 @@ public final class JsonObject extends JsonElement {
    * @param value the number value associated with the member.
    */
   public void addProperty(String property, Character value) {
-    add(property, createJsonElement(value));
+    if(value == null) {
+      add(property, JsonNull.createJsonNull());
+    } else {
+      add(property, new JsonPrimitive(value));
+    }
   }
 
   /**
