@@ -20,7 +20,8 @@ import com.google.gwt.json.client.JSONNull;
 import com.google.gwt.json.client.JSONValue;
 
 public final class JsonNull extends JsonElement {
-  private static final JsonNull INSTANCE = new JsonNull();
+  
+  public static final JsonNull INSTANCE = new JsonNull();
 
   private JSONNull inner = JSONNull.getInstance();
 
